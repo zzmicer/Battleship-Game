@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.example.battleship.R
 import com.example.battleship.data.firebase.FirebaseSource
 import com.example.battleship.data.models.Player
+import com.example.battleship.internal.getViewModel
 import com.example.battleship.ui.login.LoginActivity
 import com.example.battleship.ui.setup.SetupActivity
 import com.firebase.ui.auth.AuthUI
@@ -23,17 +24,18 @@ class MainActivity : AppCompatActivity() {
         const val VS_PLAYER = "VS_PLAYER"
     }
 
+    private val viewModel by lazy {
+        getViewModel { MainViewModel() }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        getStartedButton.setOnClickListener {
-            launchLoginActivity()
-        }
-
         logoutButton.setOnClickListener {
 
             AuthUI.getInstance().signOut(this@MainActivity).addOnCompleteListener {
+                // user is now signed out
                 Toast.makeText(applicationContext, getString(R.string.user_signed_out), Toast.LENGTH_SHORT).show()
                 launchLoginActivity()
             }
@@ -41,8 +43,12 @@ class MainActivity : AppCompatActivity() {
 
         selectRoomButton.setOnClickListener {
             val intent = Intent(this, RoomActivity::class.java)
-            intent.putExtra(ME_PLAYER, getMyPlayer())
+            intent.putExtra(ME_PLAYER, viewModel.getMyPlayer())
             startActivity(intent)
+        }
+
+        getStartedButton.setOnClickListener {
+            launchLoginActivity()
         }
     }
 
@@ -52,10 +58,10 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
-
     public override fun onStart() {
         super.onStart()
-        updateUI(FirebaseSource().currentUser())
+        // Check if user is signed in (non-null) and update UI accordingly.
+        updateUI(FirebaseSource.currentUser())
     }
 
     private fun updateUI(currentUser: FirebaseUser?) {
@@ -73,10 +79,5 @@ class MainActivity : AppCompatActivity() {
             logoutButton.visibility = View.GONE
             selectRoomButton.visibility = View.GONE
         }
-    }
-
-    private fun getMyPlayer(): Player {
-        val currentUser = FirebaseSource().currentUser()
-        return Player(currentUser?.displayName.toString(), 0)
     }
 }

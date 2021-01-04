@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 @Parcelize
-data class Player(var playerName: String, private var score: Int = 0) : Parcelable {
+data class Player(var playerName: String, var score: Int = 0) : Parcelable {
 
     // Adds points to the players score
     fun addScore(points: Int) {

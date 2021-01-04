@@ -1,12 +1,12 @@
 package com.example.battleship.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.battleship.R
 import com.example.battleship.data.firebase.FirebaseSource
 import com.example.battleship.data.models.Player
@@ -19,10 +19,13 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_room.*
 
 class RoomActivity : AppCompatActivity() {
+
     lateinit var myPlayer: Player
 
     var roomName: String = ""
     var roleName: String = ""
+
+    private lateinit var roomsListener: ValueEventListener
 
     private lateinit var database: FirebaseDatabase
     private lateinit var roomsRef: DatabaseReference
@@ -35,8 +38,8 @@ class RoomActivity : AppCompatActivity() {
         setContentView(R.layout.activity_room)
         title = getString(R.string.choose_opponent)
 
-        database = FirebaseSource().database
-        myPlayer = intent.getParcelableExtra(ME_PLAYER)!!
+        database = FirebaseSource.database
+        myPlayer = intent.getParcelableExtra<Player>(ME_PLAYER) as Player
 
         createRoomButton.setOnClickListener {
 
@@ -58,7 +61,7 @@ class RoomActivity : AppCompatActivity() {
 
         roomsRef = database.getReference(FirebaseSource.ROOMS_TABLE)
 
-        val roomsListener = object : ValueEventListener {
+        roomsListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 roomsList.clear()
 
@@ -141,5 +144,8 @@ class RoomActivity : AppCompatActivity() {
         roomRef.addValueEventListener(roomListener)
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        roomsRef.removeEventListener(roomsListener)
+    }
 }

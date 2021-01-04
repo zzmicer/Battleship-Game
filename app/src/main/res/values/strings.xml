@@ -18,4 +18,12 @@
     <string name="success_join_room">Successfully joined room</string>
     <string name="success_create_room">Successfully created room</string>
     <string name="choose_opponent">Choose Opponent</string>
+    <string name="me">Me</string>
+    <string name="player">Player</string>
+    <string name="you_won">You Won!</string>
+    <string name="game_over">Game Over</string>
+    <string name="not_your_turn">It\'s not your turn yet!</string>
+    <string name="game_over_subtitle">Better luck next time...</string>
+    <string name="you_won_subtitle">You destroyed all the ships...</string>
+    <string name="place_ships">Place Your Ships</string>
 </resources>
