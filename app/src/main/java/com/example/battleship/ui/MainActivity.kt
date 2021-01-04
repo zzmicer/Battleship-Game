@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import com.example.battleship.R
 import com.example.battleship.data.firebase.FirebaseSource
+import com.example.battleship.data.models.Player
 import com.example.battleship.ui.login.LoginActivity
 import com.example.battleship.ui.setup.SetupActivity
 import com.firebase.ui.auth.AuthUI
@@ -14,6 +15,14 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        const val ME_PLAYER = "ME_PLAYER"
+        const val ROOM_NAME = "ROOM_NAME"
+        const val ROLE_NAME = "ROLE_NAME"
+        const val VS_PLAYER = "VS_PLAYER"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,8 +39,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        continueButton.setOnClickListener {
-            val intent = Intent(this, SetupActivity::class.java)
+        selectRoomButton.setOnClickListener {
+            val intent = Intent(this, RoomActivity::class.java)
+            intent.putExtra(ME_PLAYER, getMyPlayer())
             startActivity(intent)
         }
     }
@@ -55,13 +65,18 @@ class MainActivity : AppCompatActivity() {
             welcomeView.text = String.format("Welcome - %s", currentUser.displayName)
             getStartedButton.visibility = View.GONE
             logoutButton.visibility = View.VISIBLE
-            continueButton.visibility = View.VISIBLE
+            selectRoomButton.visibility = View.VISIBLE
 
         } else {
 
             getStartedButton.visibility = View.VISIBLE
             logoutButton.visibility = View.GONE
-            continueButton.visibility = View.GONE
+            selectRoomButton.visibility = View.GONE
         }
+    }
+
+    private fun getMyPlayer(): Player {
+        val currentUser = FirebaseSource().currentUser()
+        return Player(currentUser?.displayName.toString(), 0)
     }
 }

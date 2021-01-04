@@ -13,4 +13,9 @@
     <string name="user_signed_out">User has signed out!</string>
     <string name="logout">Logout</string>
     <string name="Welcome">Welcome</string>
+    <string name="create_room">Create Room</string>
+    <string name="creating_room">Creating Room</string>
+    <string name="success_join_room">Successfully joined room</string>
+    <string name="success_create_room">Successfully created room</string>
+    <string name="choose_opponent">Choose Opponent</string>
 </resources>

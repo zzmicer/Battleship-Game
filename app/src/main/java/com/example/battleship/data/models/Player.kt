@@ -1,9 +1,12 @@
 package com.example.battleship.data.models
 
+import android.os.Parcelable
 import com.example.battleship.internal.FieldOccupiedException
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
-data class Player(var playerName: String, private var score: Int = 0) {
+@Parcelize
+data class Player(var playerName: String, private var score: Int = 0) : Parcelable {
 
     // Adds points to the players score
     fun addScore(points: Int) {

@@ -1,6 +1,11 @@
 package com.example.battleship.data.models
 
-class Ship(val shipType: ShipType, var orientation: Orientation = Orientation.VERTICAL) {
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+class Ship(val shipType: ShipType, var orientation: Orientation = Orientation.VERTICAL) :
+    Parcelable {
 
     // An array list to store this ships coordinates
     var coords: ArrayList<Coordinate> = arrayListOf()

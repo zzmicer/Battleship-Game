@@ -1,9 +1,12 @@
 package com.example.battleship.data.models
 
+import android.os.Parcelable
 import com.example.battleship.internal.FieldOccupiedException
 import com.example.battleship.internal.InvalidShotException
+import kotlinx.android.parcel.Parcelize
 
-class Board(var boardX: Int = 10, var boardY: Int = 10) {
+@Parcelize
+class Board(var boardX: Int = 10, var boardY: Int = 10) : Parcelable {
 
     // An ArrayList to store and keep track of ships, their points, names and status (hit or sunk)
     var fleet: ArrayList<Ship> = arrayListOf()
