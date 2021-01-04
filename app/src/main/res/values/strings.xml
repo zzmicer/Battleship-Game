@@ -26,4 +26,8 @@
     <string name="game_over_subtitle">Better luck next time...</string>
     <string name="you_won_subtitle">You destroyed all the ships...</string>
     <string name="place_ships">Place Your Ships</string>
+    <string name="watch_stat">Profile</string>
+    <string name="stat">Statistics</string>
+    <string name="btn_save">Save</string>
+
 </resources>

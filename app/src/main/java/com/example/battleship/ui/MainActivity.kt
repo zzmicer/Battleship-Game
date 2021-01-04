@@ -11,9 +11,11 @@ import com.example.battleship.data.models.Player
 import com.example.battleship.internal.getViewModel
 import com.example.battleship.ui.login.LoginActivity
 import com.example.battleship.ui.setup.SetupActivity
+import com.example.battleship.ui.stat.ProfileActivity
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_profile.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,6 +52,11 @@ class MainActivity : AppCompatActivity() {
         getStartedButton.setOnClickListener {
             launchLoginActivity()
         }
+        watchStatButton.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private fun launchLoginActivity() {
@@ -72,12 +79,14 @@ class MainActivity : AppCompatActivity() {
             getStartedButton.visibility = View.GONE
             logoutButton.visibility = View.VISIBLE
             selectRoomButton.visibility = View.VISIBLE
+            watchStatButton.visibility = View.VISIBLE
 
         } else {
 
             getStartedButton.visibility = View.VISIBLE
             logoutButton.visibility = View.GONE
             selectRoomButton.visibility = View.GONE
+            watchStatButton.visibility = View.GONE
         }
     }
 }
