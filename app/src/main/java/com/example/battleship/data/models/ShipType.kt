@@ -1,4 +1,4 @@
-package com.example.battleship.data
+package com.example.battleship.data.models
 
 enum class ShipType(val size: Int, val shipName: String, val points: Int) {
     CARRIER(5, "Carrier", 50),

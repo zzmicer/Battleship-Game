@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.battleship.R
-import com.example.battleship.data.Ship
+import com.example.battleship.data.models.Ship
 
 class ShipListAdapter(private val context: Context, private val dataSource: ArrayList<Ship>): BaseAdapter(){
 

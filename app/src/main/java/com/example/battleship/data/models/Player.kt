@@ -1,4 +1,4 @@
-package com.example.battleship.data
+package com.example.battleship.data.models
 
 import com.example.battleship.internal.FieldOccupiedException
 import java.util.*

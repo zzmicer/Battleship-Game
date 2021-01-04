@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.battleship.R
-import com.example.battleship.data.*
+import com.example.battleship.data.models.*
 import com.example.battleship.internal.FieldOccupiedException
 import kotlinx.android.synthetic.main.activity_setup.*
 import java.lang.StrictMath.floor
@@ -89,7 +89,9 @@ class SetupActivity : AppCompatActivity() {
             val ship = selectedShip
 
             try {
-                player.tryPlaceShip(board, ship!!, Coordinate(x, y))
+                player.tryPlaceShip(board, ship!!,
+                    Coordinate(x, y)
+                )
                 boardAdapter.refresh(board.getFieldStatus())
 
                 selectedShip = null

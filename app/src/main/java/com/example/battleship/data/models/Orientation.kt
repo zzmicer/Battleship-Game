@@ -1,4 +1,6 @@
-package com.example.battleship.data
+package com.example.battleship.data.models
+
+import com.example.battleship.data.models.Coordinate
 
 enum class Orientation {
 
